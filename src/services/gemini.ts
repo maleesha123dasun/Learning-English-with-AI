@@ -9,7 +9,7 @@ export const getGeminiResponse = async (prompt: string, systemInstruction?: stri
 
   const ai = new GoogleGenAI({ apiKey });
   const response = await ai.models.generateContent({
-    model: model: "gemini-1.5-flash",
+    model: "gemini-1.5-flash",
     contents: prompt,
     config: {
       systemInstruction: systemInstruction || "You are a helpful English teacher named EnglishMaster AI.",
