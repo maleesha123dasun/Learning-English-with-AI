@@ -1,0 +1,1 @@
+export type Category = 'grammar' | 'phrasal_verbs' | 'idioms' | 'speaking' | 'slang' | 'proverbs' | 'online_resources';

@@ -1,0 +1,28 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Search, Book, Loader2, Volume2 } from 'lucide-react';
+import { dictionaryLookup, generateSpeech } from '../services/gemini';
+
+export const Dictionary = () => {
+  const [query, setQuery] = React.useState('');
+  const [result, setResult] = React.useState<any>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isSpeaking, setIsSpeaking] = React.useState(false);
+
+  const handleSpeak = async (text: string) => {
+    if (isSpeaking) return;
+    setIsSpeaking(true);
+    try {
+      const audioUrl = await generateSpeech(text);
+      const audio = new Audio(audioUrl);
+      await audio.play();
+    } catch (error) {
+      console.error("Speech failed:", error);
+      const utterance = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(utterance);
+    } finally {
+      setIsSpeaking(false);
+    }
+  };
+
+  // ... rest of the component with the Volume2 button added next to result.word
